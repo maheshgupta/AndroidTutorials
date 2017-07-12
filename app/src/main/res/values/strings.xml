@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AndroidTutorials</string>
+
+    <string name="stringOne">Hello World By Activity One</string>
+</resources>
