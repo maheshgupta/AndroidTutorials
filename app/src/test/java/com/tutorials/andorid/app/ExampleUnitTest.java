@@ -1,4 +1,4 @@
-package codeproject.sample.com.androidtutorials;
+package com.tutorials.andorid.app;
 
 import org.junit.Test;
 

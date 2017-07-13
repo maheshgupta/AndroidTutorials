@@ -1,7 +1,9 @@
-package codeproject.sample.com.androidtutorials;
+package com.tutorials.andorid.app;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -10,4 +12,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
     }
+
+    public void goToAnotherScreen(View view) {
+        Toast.makeText(this, "Going to another screen", Toast.LENGTH_SHORT).show();
+    }
+
 }
