@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">AndroidTutorials</string>
+    <string name="web_view">WEB VIEW</string>
+    <string name="load_url">LOAD URL</string>
+    <string name="open_camera">OPEN CAMERA</string>
+    <string name="save_profile">Save Profile</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="show_profile_page">CREATE PROFILE</string>
+    <string name="firstname">First Name</string>
+    <string name="location">Location</string>
+    <string name="select_location">Select Location</string>
 </resources>

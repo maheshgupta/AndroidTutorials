@@ -1,46 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.tutorials.andorid.app.HomeActivity">
 
-    <ImageView
-        android:id="@+id/imgView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/samplepic"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <EditText
-        android:id="@+id/editSomeText"
+    <Button
+        android:id="@+id/btnWebViewExample"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button"
-        android:layout_alignStart="@+id/button"
-        android:layout_below="@+id/imgView"
-        android:layout_marginTop="12dp"
-        android:hint="Enter some text here"
-        android:maxLength="10"
-        android:maxLines="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:onClick="showWebViewExample"
+        android:text="@string/web_view" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnOpenCamera"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:onClick="goToAnotherScreen"
-        android:text="CLICK ME" />
+        android:onClick="showCamera"
+        android:text="@string/open_camera" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/btnShowProfilePage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="showProfilePage"
+        android:text="@string/show_profile_page" />
+
+</LinearLayout>
