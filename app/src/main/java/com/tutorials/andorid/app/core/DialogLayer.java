@@ -14,14 +14,27 @@ public class DialogLayer extends AppCompatActivity {
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(this);
         }
-        if (progressDialog.isShowing()){
+        if (progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
 
         progressDialog.setTitle(title);
         progressDialog.setMessage(message);
-
+        progressDialog.setCancelable(false);
+        progressDialog.show();
     }
 
 
+    public void dismissProgress() {
+        if (progressDialog != null && !progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        dismissProgress();
+    }
 }

@@ -11,4 +11,9 @@
     <string name="select_location">Select Location</string>
     <string name="status">Status</string>
     <string name="title_activity_maps">Map</string>
+    <string name="Login">Login</string>
+    <string name="register">Register</string>
+    <string name="register_now">&lt;u&gt;Register Now&lt;/u&gt;</string>
+    <string name="hint_login_email">Email</string>
+    <string name="hint_login_password">Password</string>
 </resources>
