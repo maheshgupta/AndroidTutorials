@@ -7,6 +7,16 @@
     android:orientation="vertical"
     tools:context="com.tutorials.andorid.app.HomeActivity">
 
+    <TextView
+        android:id="@+id/txt_view_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/status"
+        android:textSize="20sp" />
+
     <Button
         android:id="@+id/btnWebViewExample"
         android:layout_width="match_parent"
@@ -27,5 +37,19 @@
         android:layout_height="wrap_content"
         android:onClick="showProfilePage"
         android:text="@string/show_profile_page" />
+
+    <fragment
+        android:id="@+id/simple_fragment1"
+        android:name="com.tutorials.andorid.app.SimpleFragment"
+        android:layout_width="match_parent"
+        android:layout_height="100dip"
+        tools:layout="@layout/simple_fragment" />
+
+    <fragment
+        android:id="@+id/simple_fragment2"
+        android:name="com.tutorials.andorid.app.SimpleFragment"
+        android:layout_width="match_parent"
+        android:layout_height="100dip"
+        tools:layout="@layout/simple_fragment" />
 
 </LinearLayout>

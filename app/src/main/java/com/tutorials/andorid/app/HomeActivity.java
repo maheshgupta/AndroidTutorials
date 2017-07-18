@@ -5,9 +5,14 @@ import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.tutorials.andorid.app.model.UserProfile;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -15,10 +20,34 @@ public class HomeActivity extends AppCompatActivity {
 
     private ImageView imageView;
 
+    private static final String TAG = "HomeActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG, TAG + " onCreate: ");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        setStatus("Just Stated...");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, TAG + "onResume: ");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setStatus("Loading...");
+    }
+
+
+    private void setStatus(String message) {
+        TextView txtViewStatus = (TextView) findViewById(R.id.txt_view_status);
+        txtViewStatus.setText(message);
     }
 
     public void showWebViewExample(View view) {
@@ -28,7 +57,6 @@ public class HomeActivity extends AppCompatActivity {
 
     public void showCamera(View view) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        startActivity(intent);
         startActivityForResult(intent, REQUEST_CODE_CAMERA);
         Intent finalIntent = Intent.createChooser(intent, "Take Via");
         if (finalIntent.resolveActivity(getPackageManager()) != null) {
@@ -37,7 +65,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void showProfilePage(View view) {
-        startActivity(ProfileActivity.createIntent(this));
+        UserProfile userProfile = new UserProfile();
+        userProfile.setFirstName("Ritwik");
+        userProfile.setLastName("Vallabdhas");
+        userProfile.setEmail("ritwik@gmail.com");
+        userProfile.setPhoneNumber("+1111111111");
+        startActivity(ProfileActivity.createIntent(this, userProfile));
     }
 
 
