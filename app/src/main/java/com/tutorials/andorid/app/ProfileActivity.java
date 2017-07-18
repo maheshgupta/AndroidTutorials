@@ -6,19 +6,40 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.tutorials.andorid.app.model.UserProfile;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    private static final String TAG = "ProfileActivity";
+
     private static final int REQUEST_CODE_CAMERA = 100;
+
+    public static final String FIRST_NAME = "FIRST_NAME";
+    public static final String LAST_NAME = "LAST_NAME";
+    public static final String EMAIL = "EMAIL";
+    public static final String PHONE_NUMBER = "PHONE_NUMBER";
+    public static final String ZIP_CODE = "ZIP_CODE";
+    public static final String ADDRESS1 = "ADDRESS1";
+    public static final String ADDRESS2 = "ADDRESS2";
+
+    private static final String USER_PROFILE = "USER_PROFILE";
+
 
     ImageView profileImageView;
 
-    public static Intent createIntent(Context context) {
-        return new Intent(context, ProfileActivity.class);
+    public static Intent createIntent(@NonNull Context context, @NonNull UserProfile userProfile) {
+        Intent intent = new Intent(context, ProfileActivity.class);
+        intent.putExtra(USER_PROFILE, userProfile);
+        return intent;
     }
 
 
@@ -27,6 +48,14 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_activity);
         this.profileImageView = (ImageView) findViewById(R.id.imgview_profile);
+        UserProfile userProfile = (UserProfile) getIntent().getParcelableExtra(USER_PROFILE);
+        Log.i(TAG, "onCreate: FirstName : " + userProfile.getFirstName());
+
+        EditText editTextFirstName = (EditText) findViewById(R.id.edit_text_first_name);
+        if (userProfile != null) {
+            editTextFirstName.setText(userProfile.getFirstName());
+            Toast.makeText(this, userProfile.getFirstName(), Toast.LENGTH_SHORT).show();
+        }
     }
 
 
