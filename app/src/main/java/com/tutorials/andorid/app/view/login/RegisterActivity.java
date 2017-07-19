@@ -46,12 +46,13 @@ public class RegisterActivity extends BaseActivity {
             Toast.makeText(this, "Invalid entries", Toast.LENGTH_SHORT).show();
             return;
         }
-//        showProgress("", "Please Wait...");
+        showPleaseWait();
         firebase.createUserWithEmailAndPassword(txtEmail, txtPassword).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 dismissProgress();
-                Toast.makeText(RegisterActivity.this, "Registered...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, getResources().getString(R.string.register_success), Toast.LENGTH_SHORT).show();
+                gotoLogin();
             }
         }).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -60,7 +61,6 @@ public class RegisterActivity extends BaseActivity {
                 log("Failed to register : " + task.getResult().toString());
             }
         });
-
     }
 
 

@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
+import com.tutorials.andorid.app.R;
+
 
 public class DialogLayer extends AppCompatActivity {
 
@@ -22,6 +24,10 @@ public class DialogLayer extends AppCompatActivity {
         progressDialog.setMessage(message);
         progressDialog.setCancelable(false);
         progressDialog.show();
+    }
+
+    public void showPleaseWait() {
+        showProgress("", getResources().getString(R.string.please_wait));
     }
 
 

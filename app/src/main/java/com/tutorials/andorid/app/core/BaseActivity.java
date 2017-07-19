@@ -1,10 +1,14 @@
 package com.tutorials.andorid.app.core;
 
-import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.tutorials.andorid.app.utils.AppUtils;
+import com.tutorials.andorid.app.view.dashboard.DashboardActivity;
+import com.tutorials.andorid.app.view.login.LoginActivity;
 
 
 public abstract class BaseActivity extends DialogLayer {
@@ -17,7 +21,7 @@ public abstract class BaseActivity extends DialogLayer {
 
 
     public void log(String message) {
-        Log.i(TAG, message);
+        AppUtils.log(TAG, message);
     }
 
 
@@ -28,6 +32,22 @@ public abstract class BaseActivity extends DialogLayer {
     }
 
 
+    public void gotoLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    public void goToDashBoard() {
+        Intent intent = new Intent(this, DashboardActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+
+    public FirebaseAuth getFireBase() {
+        return FirebaseAuth.getInstance();
+    }
 
 
 }

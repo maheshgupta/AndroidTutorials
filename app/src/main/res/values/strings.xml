@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">AndroidTutorials</string>
+
+    <string name="please_wait">Please Wait...</string>
+
     <string name="web_view">WEB VIEW</string>
     <string name="load_url">LOAD URL</string>
     <string name="open_camera">OPEN CAMERA</string>
@@ -16,4 +19,20 @@
     <string name="register_now">&lt;u&gt;Register Now&lt;/u&gt;</string>
     <string name="hint_login_email">Email</string>
     <string name="hint_login_password">Password</string>
+    <string name="register_success">Registered Successfully...</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="dashboard_titles">
+        <item>Catalog</item>
+        <item>Locations</item>
+        <item>Orders</item>
+        <item>Cart</item>
+    </string-array>
+
+
 </resources>

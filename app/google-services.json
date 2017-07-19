@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "839432074919-phjrnmr5jf94ori2jt0fpap8k9e8j6kt.apps.googleusercontent.com",
+          "client_id": "839432074919-edrum8v93l6go2rcvv0oi7cn6tco4ia7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.tutorials.andorid.app",
-            "certificate_hash": "075fdd5e7c06916804df7ba1f3c18df6f26aebd6"
+            "certificate_hash": "c66d397538f13e8d397f5c269b8d0e33d8e19b0b"
           }
         },
         {
@@ -30,6 +30,9 @@
       "api_key": [
         {
           "current_key": "AIzaSyCv3S-vgM9AlrwmQnpYEqIGovd25cg-BqQ"
+        },
+        {
+          "current_key": "AIzaSyAY5FTjk7STwRGDCffRxsLA0C0_s8waInM"
         }
       ],
       "services": {
