@@ -7,6 +7,74 @@
     android:orientation="vertical"
     tools:context="com.tutorials.andorid.app.HomeActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnWebViewExample"
+                style="@style/AppButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:onClick="showWebViewExample"
+                android:text="@string/web_view"
+                android:textColor="@color/colorAccent" />
+
+            <Button
+                android:id="@+id/btnOpenCamera"
+                style="@style/AppButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="showCamera"
+                android:text="@string/open_camera" />
+
+            <Button
+                android:id="@+id/btnShowProfilePage"
+                style="@style/AppButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="showProfilePage"
+                android:text="@string/show_profile_page" />
+
+            <Button
+                style="@style/AppButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="addFragment"
+                android:text="ADD FRAGMENT" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Show Progress" />
+
+            <Button
+                style="@style/AppButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Show Alert Dialog" />
+
+
+            <FrameLayout
+                android:id="@+id/fragment_container_one"
+                android:layout_width="match_parent"
+                android:layout_height="100dip"></FrameLayout>
+
+
+            <FrameLayout
+                android:id="@+id/fragment_container_two"
+                android:layout_width="match_parent"
+                android:layout_height="100dip"></FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+
     <TextView
         android:id="@+id/txt_view_status"
         android:layout_width="match_parent"
@@ -17,39 +85,5 @@
         android:text="@string/status"
         android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/btnWebViewExample"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="showWebViewExample"
-        android:text="@string/web_view" />
-
-    <Button
-        android:id="@+id/btnOpenCamera"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="showCamera"
-        android:text="@string/open_camera" />
-
-    <Button
-        android:id="@+id/btnShowProfilePage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="showProfilePage"
-        android:text="@string/show_profile_page" />
-
-    <fragment
-        android:id="@+id/simple_fragment1"
-        android:name="com.tutorials.andorid.app.SimpleFragment"
-        android:layout_width="match_parent"
-        android:layout_height="100dip"
-        tools:layout="@layout/simple_fragment" />
-
-    <fragment
-        android:id="@+id/simple_fragment2"
-        android:name="com.tutorials.andorid.app.SimpleFragment"
-        android:layout_width="match_parent"
-        android:layout_height="100dip"
-        tools:layout="@layout/simple_fragment" />
 
 </LinearLayout>

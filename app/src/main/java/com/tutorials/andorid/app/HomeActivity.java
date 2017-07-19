@@ -1,16 +1,20 @@
 package com.tutorials.andorid.app;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tutorials.andorid.app.model.UserProfile;
 
@@ -21,6 +25,8 @@ public class HomeActivity extends AppCompatActivity {
     private ImageView imageView;
 
     private static final String TAG = "HomeActivity";
+
+    private int fragmentIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +79,69 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(ProfileActivity.createIntent(this, userProfile));
     }
 
+    public void addFragment(View view) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        Fragment fragment = SampleFragment.getInstance("FRAGMENT - " + this.fragmentIndex);
+        if (this.fragmentIndex % 2 == 0) {
+            fragmentTransaction.replace(R.id.fragment_container_one, fragment);
+        } else {
+            fragmentTransaction.replace(R.id.fragment_container_two, fragment);
+        }
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+        this.fragmentIndex++;
+    }
+
+    public void showProgress(View view) {
+        final ProgressDialog progressDialog = new ProgressDialog(HomeActivity.this);
+
+        progressDialog.setTitle("Downloading");
+        progressDialog.setMessage("Please wait while downloading");
+        progressDialog.show();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                progressDialog.dismiss();
+            }
+        }).start();
+    }
+
+    public void showAlertDialog(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+        builder.setTitle("Question");
+        builder.setMessage("Do you want to proceed ?");
+        builder.setCancelable(false);
+        
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                Toast.makeText(HomeActivity.this, "Ok Clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                Toast.makeText(HomeActivity.this, "Cancel Clicked", Toast.LENGTH_SHORT).show();            }
+        });
+
+
+        builder.show();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
