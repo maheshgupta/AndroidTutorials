@@ -1,15 +1,19 @@
 package com.tutorials.andorid.app;
 
+import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Fade;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -40,9 +44,17 @@ public class HomeActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        setStatus("Just Stated...");
+        setupWindowAnimations();
     }
+
+    private void setupWindowAnimations() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Slide slide = new Slide();
+            slide.setDuration(1000);
+            getWindow().setExitTransition(slide);
+        }
+    }
+
 
     @Override
     protected void onResume() {
@@ -81,7 +93,17 @@ public class HomeActivity extends AppCompatActivity {
         userProfile.setLastName("Vallabdhas");
         userProfile.setEmail("ritwik@gmail.com");
         userProfile.setPhoneNumber("+1111111111");
+
         startActivity(ProfileActivity.createIntent(this, userProfile));
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        } else {
+            super.startActivity(intent);
+        }
     }
 
     public void addFragment(View view) {
