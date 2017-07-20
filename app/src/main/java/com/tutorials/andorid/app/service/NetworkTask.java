@@ -6,13 +6,17 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.tutorials.andorid.app.model.user.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -24,6 +28,7 @@ public abstract class NetworkTask<T> extends AsyncTask<Void, Void, T> {
     private URL remoteUrl;
     private InputStream inputStream;
     private RequestType requestType;
+    private Type mResponseType;
 
 
     public abstract void onSuccess(T response);
@@ -37,8 +42,10 @@ public abstract class NetworkTask<T> extends AsyncTask<Void, Void, T> {
         GET, POST
     }
 
-    public NetworkTask(String url) throws MalformedURLException {
+    public NetworkTask(String url, Type responseType) throws MalformedURLException {
         this.remoteUrl = new URL(url);
+        this.mResponseType = responseType;
+
     }
 
 
@@ -65,6 +72,16 @@ public abstract class NetworkTask<T> extends AsyncTask<Void, Void, T> {
         }
     }
 
+    private String readStream(InputStream stream)
+            throws IOException, UnsupportedEncodingException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+        StringBuilder result = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            result.append(line);
+        }
+        return result.toString();
+    }
 
     private T makeGetRequest() {
         T response = null;
@@ -82,10 +99,8 @@ public abstract class NetworkTask<T> extends AsyncTask<Void, Void, T> {
                 }
 
                 Gson gson = new Gson();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(this.inputStream));
-
-                response = gson.fromJson(reader, new TypeToken<T>() {
-                }.getType());
+                String jsonString = this.readStream(this.inputStream);
+                response = gson.fromJson(jsonString, this.mResponseType);
                 Log.i("", "_makeGetRequest: ");
             } else {
                 this.error = "HTTP error code: " + responseCode;
