@@ -16,7 +16,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tutorials.andorid.app.model.User;
 import com.tutorials.andorid.app.model.UserProfile;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -79,6 +84,33 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(ProfileActivity.createIntent(this, userProfile));
     }
 
+
+    public void connectToNetwork(View view) {
+//        String url = "https://jsonplaceholder.typicode.com/users";
+//        try {
+//            NetworkConnection connection = new NetworkConnection<ArrayList<User>>(url);
+//            connection.makeRequest(NetworkConnection.RequestType.GET, new NetworkConnection.Callback() {
+//                @Override
+//                public void onSuccess(Object response) {
+//                    User user = (User) response;
+//                    setStatus(user.getUsername());
+//                }
+//
+//                @Override
+//                public void onError(String error) {
+//                    setStatus(error);
+//                }
+//            });
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        Intent intent = new Intent(this, ListViewExampleActivity.class);
+        startActivity(intent);
+    }
+
+
     public void addFragment(View view) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         Fragment fragment = SampleFragment.getInstance("FRAGMENT - " + this.fragmentIndex);
@@ -117,7 +149,7 @@ public class HomeActivity extends AppCompatActivity {
         builder.setTitle("Question");
         builder.setMessage("Do you want to proceed ?");
         builder.setCancelable(false);
-        
+
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -130,7 +162,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
-                Toast.makeText(HomeActivity.this, "Cancel Clicked", Toast.LENGTH_SHORT).show();            }
+                Toast.makeText(HomeActivity.this, "Cancel Clicked", Toast.LENGTH_SHORT).show();
+            }
         });
 
 
