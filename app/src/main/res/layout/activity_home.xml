@@ -11,11 +11,10 @@
         android:id="@+id/txt_view_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="4dp"
         android:gravity="center_horizontal"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:text="@string/status"
-        android:textSize="20sp" />
+        android:text="Status..."
+        android:textSize="24sp" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -58,14 +57,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="addFragment"
-                android:text="ADD FRAGMENT" />
+                android:text="@string/add_fragment" />
 
             <Button
                 style="@style/AppButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="connectToNetwork"
-                android:text="@string/connect_to_network" />
+                android:text="CONNECT TO NETWORK" />
 
 
             <FrameLayout
