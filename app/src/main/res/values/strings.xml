@@ -12,4 +12,5 @@
     <string name="status">Status</string>
     <string name="title_activity_maps">Map</string>
     <string name="add_fragment">ADD FRAGMENT</string>
+    <string name="albums">Albums</string>
 </resources>
