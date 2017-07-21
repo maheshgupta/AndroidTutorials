@@ -5,14 +5,13 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.Explode;
-import android.transition.Fade;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.transition.Slide;
 import android.transition.Transition;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,6 +25,7 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import adapters.UsersAdapter;
+import adapters.UsersRecyclerAdapter;
 
 public class UsersActivity extends AppCompatActivity {
 
@@ -34,6 +34,7 @@ public class UsersActivity extends AppCompatActivity {
     private ArrayList<User> users = null;
 
     private ListView listView;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +77,7 @@ public class UsersActivity extends AppCompatActivity {
                 public void onSuccess(ArrayList<User> response) {
                     Log.i(TAG, "onSuccess");
                     users = response;
-                    UsersActivity.this.renderUsers();
+                    UsersActivity.this.renderUsersAsRecyclerView();
                 }
 
                 @Override
@@ -90,7 +91,7 @@ public class UsersActivity extends AppCompatActivity {
     }
 
 
-    private void renderUsers() {
+    private void renderUsersAsListView() {
         if (this.users == null || this.users.size() <= 0) {
             Toast.makeText(this, "No users...", Toast.LENGTH_SHORT).show();
             return;
@@ -113,6 +114,26 @@ public class UsersActivity extends AppCompatActivity {
         this.listView.setAdapter(adapter);
     }
 
+
+    private void renderUsersAsRecyclerView() {
+        if (this.users == null || this.users.size() <= 0) {
+            Toast.makeText(this, "No users...", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        this.recyclerView = (RecyclerView) findViewById(R.id.usersRecyclerView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        UsersRecyclerAdapter usersRecyclerAdapter = new UsersRecyclerAdapter(this, this.users);
+
+        this.recyclerView.setLayoutManager(layoutManager);
+        this.recyclerView.setHasFixedSize(true);
+        usersRecyclerAdapter.setCallback(new UsersRecyclerAdapter.Callback() {
+            @Override
+            public void onItemClick(int position) {
+                showAlbumsActivity(position);
+            }
+        });
+        this.recyclerView.setAdapter(usersRecyclerAdapter);
+    }
 
     private void showUserProfileScreen(int index) {
         if (this.users == null || this.users.size() <= 0) return;
