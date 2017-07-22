@@ -45,7 +45,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.users.UserProfileActivity" />
-        <activity android:name=".view.users.AlbumsActivity" android:label="@string/albums"></activity>
+        <activity
+            android:name=".view.users.AlbumsActivity"
+            android:label="@string/albums" />
+        <activity
+            android:name=".view.users.PhotosActivity"
+            android:label="@string/photos" />
+        <activity android:name=".view.users.PhotoActivity"></activity>
     </application>
 
 </manifest>
