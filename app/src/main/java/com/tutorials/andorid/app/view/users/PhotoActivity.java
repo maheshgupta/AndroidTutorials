@@ -20,6 +20,7 @@ public class PhotoActivity extends AppCompatActivity {
 
     private Photo photo;
 
+    //Small Change
 
     public static Intent createIntent(@NonNull Context context, @NonNull Photo photo) {
         Intent intent = new Intent(context, PhotoActivity.class);
