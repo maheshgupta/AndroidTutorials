@@ -18,13 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".HomeActivity" />
         <activity android:name=".ActivityTwo" />
         <activity android:name=".WebViewActivityExample" />
         <activity android:name=".ProfileActivity" />
@@ -42,7 +36,22 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".view.users.UsersActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.users.UserProfileActivity" />
+        <activity
+            android:name=".view.users.AlbumsActivity"
+            android:label="@string/albums" />
+        <activity
+            android:name=".view.users.PhotosActivity"
+            android:label="@string/photos" />
+        <activity android:name=".view.users.PhotoActivity"></activity>
     </application>
 
 </manifest>
