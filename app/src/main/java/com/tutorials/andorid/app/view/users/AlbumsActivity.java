@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -56,7 +58,7 @@ public class AlbumsActivity extends AppCompatActivity {
     private void pullAlbums() {
         try {
 
-            String url = "https://jsonplaceholder.typicode.com/albums?userId="+this.selectedUser.getId();
+            String url = "https://jsonplaceholder.typicode.com/albums?userId=" + this.selectedUser.getId();
             Type typeToken = new TypeToken<ArrayList<Album>>() {
             }.getType();
 
@@ -79,7 +81,7 @@ public class AlbumsActivity extends AppCompatActivity {
     }
 
     private void renderAlbumsList(ArrayList<Album> albums) {
-        ArrayList<Album> tempAlbums = new ArrayList<>();
+        final ArrayList<Album> tempAlbums = new ArrayList<>();
 
         tempAlbums.addAll(albums);
         tempAlbums.addAll(albums);
@@ -87,8 +89,19 @@ public class AlbumsActivity extends AppCompatActivity {
         tempAlbums.addAll(albums);
 
         AlbumsAdapter adapter = new AlbumsAdapter(this, 0, tempAlbums);
+        this.albumsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                Toast.makeText(AlbumsActivity.this, tempAlbums.get(i).getTitle(), Toast.LENGTH_SHORT).show();
+                showPhotos(tempAlbums.get(i));
+            }
+        });
         this.albumsListView.setAdapter(adapter);
+    }
 
+
+    private void showPhotos(@NonNull Album album) {
+        startActivity(PhotosActivity.createIntent(AlbumsActivity.this, album));
     }
 
 

@@ -39,7 +39,7 @@ public class AlbumsAdapter extends ArrayAdapter<Album> implements View.OnClickLi
             view = LayoutInflater.from(this.context).inflate(R.layout.row_album, parent, false);
             TextView txtView = view.findViewById(R.id.txt_view_album_name);
             txtView.setText(this.albumList.get(position).getTitle() + " First ");
-            view.setOnClickListener(this);
+//            view.setOnClickListener(this);
         } else {
             // When Android, is recycling the views.
             TextView txtView = view.findViewById(R.id.txt_view_album_name);
