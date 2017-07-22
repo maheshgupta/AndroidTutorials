@@ -11,4 +11,7 @@
     <string name="select_location">Select Location</string>
     <string name="status">Status</string>
     <string name="title_activity_maps">Map</string>
+    <string name="add_fragment">ADD FRAGMENT</string>
+    <string name="albums">Albums</string>
+    <string name="photos">Photos</string>
 </resources>
