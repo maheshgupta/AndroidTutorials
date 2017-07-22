@@ -7,25 +7,78 @@
     android:orientation="vertical"
     tools:context="com.tutorials.andorid.app.HomeActivity">
 
-    <Button
-        android:id="@+id/btnWebViewExample"
+    <TextView
+        android:id="@+id/txt_view_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="showWebViewExample"
-        android:text="@string/web_view" />
+        android:layout_margin="4dp"
+        android:gravity="center_horizontal"
+        android:text="Status..."
+        android:textSize="24sp" />
 
-    <Button
-        android:id="@+id/btnOpenCamera"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="showCamera"
-        android:text="@string/open_camera" />
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
 
-    <Button
-        android:id="@+id/btnShowProfilePage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="showProfilePage"
-        android:text="@string/show_profile_page" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnWebViewExample"
+                style="@style/AppButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:onClick="showWebViewExample"
+                android:text="@string/web_view"
+                android:textColor="@color/colorAccent" />
+
+            <Button
+                android:id="@+id/btnOpenCamera"
+                style="@style/AppButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="showCamera"
+                android:text="@string/open_camera" />
+
+            <Button
+                android:id="@+id/btnShowProfilePage"
+                style="@style/AppButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="showProfilePage"
+                android:text="@string/show_profile_page" />
+
+            <Button
+                style="@style/AppButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="addFragment"
+                android:text="@string/add_fragment" />
+
+            <Button
+                style="@style/AppButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="connectToNetwork"
+                android:text="CONNECT TO NETWORK" />
+
+
+            <FrameLayout
+                android:id="@+id/fragment_container_one"
+                android:layout_width="match_parent"
+                android:layout_height="100dip"></FrameLayout>
+
+
+            <FrameLayout
+                android:id="@+id/fragment_container_two"
+                android:layout_width="match_parent"
+                android:layout_height="100dip"></FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>
