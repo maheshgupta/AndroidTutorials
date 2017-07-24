@@ -30,6 +30,9 @@ public class UsersActivity extends AppCompatActivity {
 
     private ArrayList<User> users = null;
 
+    /**
+     * listView for list view implementation
+     * private ListView listView;*/
     private RecyclerView recyclerView;
 
     @Override
@@ -37,6 +40,9 @@ public class UsersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
         this.setupWindowAnimations();
+        /**
+         * listView for list view implementation
+         * this.listView = (ListView) findViewById(R.id.userListView);*/
         this.recyclerView = (RecyclerView) findViewById(R.id.usersRecyclerView);
     }
 
@@ -101,7 +107,7 @@ public class UsersActivity extends AppCompatActivity {
 //        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userNames);
 
         /**
-         *  UserAdapter for listview
+         *  userAdapter for listView implementation
         UsersAdapter adapter = new UsersAdapter(this, this.users);
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
