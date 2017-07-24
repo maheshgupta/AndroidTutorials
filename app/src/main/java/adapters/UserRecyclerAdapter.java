@@ -1,6 +1,5 @@
 package adapters;
 
-
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,22 +9,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.tutorials.andorid.app.R;
-import com.tutorials.andorid.app.model.Photo;
+import com.tutorials.andorid.app.model.user.User;
 
 import java.util.List;
 
-public class PhotosRecyclerAdapter extends RecyclerView.Adapter<PhotosRecyclerAdapter.PhotosViewHolder> implements View.OnClickListener {
+/**
+ * Created by Dhiren Rachamallu on 07/24/17.
+ */
 
-    private List<Photo> mPhotoList;
+public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapter.UserViewHolder> implements View.OnClickListener{
 
+    private List<User> usersList;
     private Context mContext;
-
     private Callback callback;
 
-    public PhotosRecyclerAdapter(@NonNull Context context, @NonNull List<Photo> photos) {
-        this.mPhotoList = photos;
+    public UserRecyclerAdapter(@NonNull Context context, @NonNull List<User> objects) {
+        this.usersList = objects;
         this.mContext = context;
     }
 
@@ -50,28 +50,28 @@ public class PhotosRecyclerAdapter extends RecyclerView.Adapter<PhotosRecyclerAd
         void onClick(int position);
     }
 
-
     @Override
-    public PhotosViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(this.mContext).inflate(R.layout.row_photo, parent, false);
-        PhotosViewHolder photosViewHolder = new PhotosViewHolder(view);
-        return photosViewHolder;
+    public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(this.mContext).inflate(R.layout.row_user, parent, false);
+        UserViewHolder viewHolder = new UserViewHolder(view);
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(PhotosViewHolder holder, int position) {
-        Photo photo = this.mPhotoList.get(position);
+    public void onBindViewHolder(UserViewHolder holder, int position) {
+        User user = usersList.get(position);
+        String userName = user.getName();
+        String userEmail = user.getEmail();
         holder.setTag(position);
         holder.holderView.setOnClickListener(this);
-        holder.txtViewPhotoTitle.setText(photo.getTitle());
-        Glide.with(this.mContext).load(photo.getThumbnailUrl()).into(holder.photoImageView);
-
+        holder.mUserName.setText(userName);
+        holder.mEmailAddress.setText(userEmail);
     }
 
     @Override
     public int getItemCount() {
-        if (this.mPhotoList == null) return 0;
-        return this.mPhotoList.size();
+        if (usersList == null) return 0;
+        return usersList.size();
     }
 
     @Override
@@ -82,26 +82,21 @@ public class PhotosRecyclerAdapter extends RecyclerView.Adapter<PhotosRecyclerAd
         }
     }
 
-    public static class PhotosViewHolder extends RecyclerView.ViewHolder {
+    public class UserViewHolder extends RecyclerView.ViewHolder {
 
         View holderView;
-        ImageView photoImageView;
-        TextView txtViewPhotoTitle;
+        TextView mUserName;
+        TextView mEmailAddress;
 
-
-        public PhotosViewHolder(View itemView) {
+        public UserViewHolder(View itemView) {
             super(itemView);
             holderView = itemView;
-            photoImageView = itemView.findViewById(R.id.image_view_photo);
-            txtViewPhotoTitle = itemView.findViewById(R.id.text_view_photo_title);
+            mUserName = itemView.findViewById(R.id.txt_view_user_name);
+            mEmailAddress = itemView.findViewById(R.id.txt_view_email_address);
         }
-
 
         public void setTag(int position) {
             this.holderView.setTag(position);
         }
-
     }
-
-
 }

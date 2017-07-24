@@ -5,14 +5,11 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.Explode;
-import android.transition.Fade;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.transition.Slide;
 import android.transition.Transition;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,7 +22,7 @@ import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
-import adapters.UsersAdapter;
+import adapters.UserRecyclerAdapter;
 
 public class UsersActivity extends AppCompatActivity {
 
@@ -33,14 +30,14 @@ public class UsersActivity extends AppCompatActivity {
 
     private ArrayList<User> users = null;
 
-    private ListView listView;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
         this.setupWindowAnimations();
-        this.listView = (ListView) findViewById(R.id.usersListView);
+        this.recyclerView = (RecyclerView) findViewById(R.id.usersRecyclerView);
     }
 
     private void setupWindowAnimations() {
@@ -103,6 +100,8 @@ public class UsersActivity extends AppCompatActivity {
 
 //        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userNames);
 
+        /**
+         *  UserAdapter for listview
         UsersAdapter adapter = new UsersAdapter(this, this.users);
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -110,7 +109,22 @@ public class UsersActivity extends AppCompatActivity {
                 showAlbumsActivity(position);
             }
         });
-        this.listView.setAdapter(adapter);
+        this.listView.setAdapter(adapter);*/
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+
+        UserRecyclerAdapter adapter = new UserRecyclerAdapter(this, this.users);
+        adapter.setCallback(new UserRecyclerAdapter.Callback() {
+
+            @Override
+            public void onClick(int position) {
+                showAlbumsActivity(position);
+            }
+        });
+        recyclerView.setAdapter(adapter);
     }
 
 
