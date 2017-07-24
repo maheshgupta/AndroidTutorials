@@ -10,6 +10,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <application
         android:allowBackup="true"
@@ -45,7 +46,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.users.UserProfileActivity" />
-        <activity android:name=".view.users.AlbumsActivity" android:label="@string/albums"></activity>
+        <activity
+            android:name=".view.users.AlbumsActivity"
+            android:label="@string/albums" />
+        <activity android:name=".view.users.NotificationActivity" />
+        <activity android:name=".SampleNotificationActivity">
+
+        </activity>
     </application>
 
 </manifest>

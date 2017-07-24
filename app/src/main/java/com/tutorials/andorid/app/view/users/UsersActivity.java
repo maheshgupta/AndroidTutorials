@@ -1,8 +1,17 @@
 package com.tutorials.andorid.app.view.users;
 
 import android.app.ActivityOptions;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -61,11 +70,18 @@ public class UsersActivity extends AppCompatActivity {
         }
     }
 
+    public void sendEvent(View view) {
+        this.sendMyBroadcast();
+    }
+
 
     @Override
     protected void onResume() {
         super.onResume();
         this.pullUsers();
+        this.addReciever();
+//        this.sendNotification();
+//        sendMyBroadcast();
     }
 
     private void pullUsers() {
@@ -143,6 +159,17 @@ public class UsersActivity extends AppCompatActivity {
         }
     }
 
+    private void addReciever() {
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.tutorials.mybroadcast");
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Toast.makeText(context, "Custom One", Toast.LENGTH_SHORT).show();
+            }
+        };
+        registerReceiver(broadcastReceiver, intentFilter);
+    }
 
     private void showAlbumsActivity(int index) {
         if (this.users == null || this.users.size() <= 0) return;
@@ -150,6 +177,59 @@ public class UsersActivity extends AppCompatActivity {
         if (user != null) {
             startActivity(AlbumsActivity.createIntent(UsersActivity.this, user));
         }
+    }
+
+    private void sendNotification() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(UsersActivity.this, "Sending Notification", Toast.LENGTH_SHORT).show();
+//                            _sendNotification();
+                            sendMyBroadcast();
+                        }
+                    });
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    public void sendMyBroadcast() {
+        String action = "com.tutorials.mybroadcast";
+        Intent intent = new Intent();
+        intent.setAction(action);
+        sendBroadcast(intent);
+    }
+
+
+    private void _sendNotification() {
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_announcement_black_24dp)
+                        .setContentTitle("My notification")
+                        .setContentText("Hello World!");
+        Intent resultIntent = new Intent(this, NotificationActivity.class);
+
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(NotificationActivity.class);
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(
+                        0,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        mBuilder.setContentIntent(resultPendingIntent);
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mNotificationManager.notify(1000001, mBuilder.build());
     }
 
 
