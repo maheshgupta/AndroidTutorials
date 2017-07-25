@@ -52,6 +52,7 @@
             android:name=".view.users.PhotosActivity"
             android:label="@string/photos" />
         <activity android:name=".view.users.PhotoActivity"></activity>
+        <activity android:name=".view.users.NotificationActivity"></activity>
     </application>
 
 </manifest>
