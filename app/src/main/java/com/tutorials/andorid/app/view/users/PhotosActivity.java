@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.tutorials.andorid.app.R;
+import com.tutorials.andorid.app.core.BaseActivity;
 import com.tutorials.andorid.app.model.Album;
 import com.tutorials.andorid.app.model.Photo;
 import com.tutorials.andorid.app.service.NetworkTask;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 
 import adapters.PhotosRecyclerAdapter;
 
-public class PhotosActivity extends AppCompatActivity {
+public class PhotosActivity extends BaseActivity {
 
     private static final String ALBUM = "ALBUM";
     private static final String TAG = "PhotosActivity";

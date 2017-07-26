@@ -52,6 +52,15 @@
             android:name=".view.users.PhotosActivity"
             android:label="@string/photos" />
         <activity android:name=".view.users.PhotoActivity"></activity>
+
+        <receiver
+            android:name=".MyBroadCastReciever"
+            android:exported="false"
+            >
+            <intent-filter>
+                <action android:name="com.sample.mybroadcast"></action>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

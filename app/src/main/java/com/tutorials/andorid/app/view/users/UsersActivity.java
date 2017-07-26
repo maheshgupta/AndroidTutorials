@@ -1,7 +1,10 @@
 package com.tutorials.andorid.app.view.users;
 
 import android.app.ActivityOptions;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +20,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
+import com.tutorials.andorid.app.MyBroadCastReciever;
 import com.tutorials.andorid.app.R;
+import com.tutorials.andorid.app.core.BaseActivity;
 import com.tutorials.andorid.app.model.user.User;
 import com.tutorials.andorid.app.service.NetworkTask;
 
@@ -27,7 +32,7 @@ import java.util.ArrayList;
 
 import adapters.UsersAdapter;
 
-public class UsersActivity extends AppCompatActivity {
+public class UsersActivity extends BaseActivity {
 
     private static final String TAG = "UsersActivity";
 
@@ -130,6 +135,15 @@ public class UsersActivity extends AppCompatActivity {
             startActivity(AlbumsActivity.createIntent(UsersActivity.this, user));
         }
     }
+
+    public void sendEvent(View view) {
+        String action = "com.sample.mybroadcast";
+        Intent intent = new Intent();
+        intent.setAction(action);
+        sendBroadcast(intent);
+    }
+
+
 
 
 }

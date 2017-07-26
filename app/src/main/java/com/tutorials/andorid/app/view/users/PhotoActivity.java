@@ -6,14 +6,16 @@ import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.tutorials.andorid.app.R;
+import com.tutorials.andorid.app.core.BaseActivity;
 import com.tutorials.andorid.app.model.Album;
 import com.tutorials.andorid.app.model.Photo;
 
-public class PhotoActivity extends AppCompatActivity {
+public class PhotoActivity extends BaseActivity {
 
     private static final String PHOTO = "PHOTO";
     private static final String TAG = "PhotosActivity";
@@ -41,4 +43,9 @@ public class PhotoActivity extends AppCompatActivity {
         ImageView imageView = (ImageView) findViewById(R.id.image_view_photo);
         Glide.with(this).load(this.photo.getUrl()).into(imageView);
     }
+
+    public void logoutApp(View view) {
+        super.sendLogOutEvent();
+    }
+
 }
