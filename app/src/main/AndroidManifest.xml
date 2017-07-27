@@ -38,11 +38,7 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".view.users.UsersActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".view.users.UserProfileActivity" />
         <activity
@@ -51,16 +47,23 @@
         <activity
             android:name=".view.users.PhotosActivity"
             android:label="@string/photos" />
-        <activity android:name=".view.users.PhotoActivity"></activity>
+        <activity android:name=".view.users.PhotoActivity" />
 
         <receiver
             android:name=".MyBroadCastReciever"
-            android:exported="false"
-            >
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.sample.mybroadcast"></action>
+                <action android:name="com.sample.mybroadcast" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".NotificationMessageActivity" />
+        <activity android:name=".view.users.login.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

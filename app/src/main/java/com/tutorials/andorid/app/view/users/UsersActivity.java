@@ -1,11 +1,15 @@
 package com.tutorials.andorid.app.view.users;
 
 import android.app.ActivityOptions;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.transition.Explode;
@@ -21,6 +25,7 @@ import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.tutorials.andorid.app.MyBroadCastReciever;
+import com.tutorials.andorid.app.NotificationMessageActivity;
 import com.tutorials.andorid.app.R;
 import com.tutorials.andorid.app.core.BaseActivity;
 import com.tutorials.andorid.app.model.user.User;
@@ -44,8 +49,10 @@ public class UsersActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
-        this.setupWindowAnimations();
+//        this.setupWindowAnimations();
         this.listView = (ListView) findViewById(R.id.usersListView);
+        this.pullUsers();
+
     }
 
     private void setupWindowAnimations() {
@@ -69,7 +76,6 @@ public class UsersActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        this.pullUsers();
     }
 
     private void pullUsers() {
@@ -137,13 +143,51 @@ public class UsersActivity extends BaseActivity {
     }
 
     public void sendEvent(View view) {
-        String action = "com.sample.mybroadcast";
-        Intent intent = new Intent();
-        intent.setAction(action);
-        sendBroadcast(intent);
+//        String action = "com.sample.mybroadcast";
+//        Intent intent = new Intent();
+//        intent.setAction(action);
+//        sendBroadcast(intent);
+
+
+        Intent resultIntent = new Intent(this, NotificationMessageActivity.class);
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(NotificationMessageActivity.class);
+        stackBuilder.addNextIntent(resultIntent);
+
+
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(
+                        0,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_assignment_late_black_24dp) //Icon
+                        .setContentTitle("My notification") //Title
+                        .setContentText("Hello World!");//Message
+
+        mBuilder.setContentIntent(resultPendingIntent); //Action, when user tapped on Notification.
+
+
+
+        NotificationCompat.InboxStyle inboxStyle =
+                new NotificationCompat.InboxStyle();
+        inboxStyle.setBigContentTitle("Event tracker details:");
+        for (int i = 0; i < 4; i++) {
+
+            inboxStyle.addLine("Event - " + i);
+        }
+        mBuilder.setStyle(inboxStyle);
+
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mNotificationManager.notify(1000001, mBuilder.build());
+
+
     }
-
-
 
 
 }

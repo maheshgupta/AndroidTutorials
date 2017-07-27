@@ -42,15 +42,9 @@ public class PhotosActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photos);
         this.album = getIntent().getParcelableExtra(ALBUM);
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         this.pullPhotos(this.album.getId());
-    }
 
+    }
 
     private void pullPhotos(int albumID) {
 
