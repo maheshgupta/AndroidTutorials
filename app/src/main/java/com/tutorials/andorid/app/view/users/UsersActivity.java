@@ -1,21 +1,14 @@
 package com.tutorials.andorid.app.view.users;
 
 import android.app.ActivityOptions;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.transition.Slide;
 import android.transition.Transition;
 import android.util.Log;
@@ -25,25 +18,26 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
+import com.tutorials.andorid.app.NotificationMessageActivity;
 import com.tutorials.andorid.app.R;
+import com.tutorials.andorid.app.core.BaseActivity;
 import com.tutorials.andorid.app.model.user.User;
 import com.tutorials.andorid.app.service.NetworkTask;
+import com.tutorials.andorid.app.services.MyService;
 
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import adapters.UsersAdapter;
-import adapters.UsersRecyclerAdapter;
 
-public class UsersActivity extends AppCompatActivity {
+public class UsersActivity extends BaseActivity {
 
     private static final String TAG = "UsersActivity";
 
     private ArrayList<User> users = null;
 
     private ListView listView;
-    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +45,8 @@ public class UsersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_users);
 //        this.setupWindowAnimations();
         this.listView = (ListView) findViewById(R.id.usersListView);
+        this.pullUsers();
+
     }
 
     private void setupWindowAnimations() {
@@ -70,18 +66,10 @@ public class UsersActivity extends AppCompatActivity {
         }
     }
 
-    public void sendEvent(View view) {
-        this.sendNotification();
-    }
-
 
     @Override
     protected void onResume() {
         super.onResume();
-        this.pullUsers();
-//        this.addReciever();
-//        this.sendNotification();
-//        sendMyBroadcast();
     }
 
     private void pullUsers() {
@@ -93,7 +81,7 @@ public class UsersActivity extends AppCompatActivity {
                 public void onSuccess(ArrayList<User> response) {
                     Log.i(TAG, "onSuccess");
                     users = response;
-                    UsersActivity.this.renderUsersAsRecyclerView();
+                    UsersActivity.this.renderUsers();
                 }
 
                 @Override
@@ -107,7 +95,7 @@ public class UsersActivity extends AppCompatActivity {
     }
 
 
-    private void renderUsersAsListView() {
+    private void renderUsers() {
         if (this.users == null || this.users.size() <= 0) {
             Toast.makeText(this, "No users...", Toast.LENGTH_SHORT).show();
             return;
@@ -117,6 +105,8 @@ public class UsersActivity extends AppCompatActivity {
         for (int i = 0; i < this.users.size(); i++) {
             userNames[i] = this.users.get(i).getName();
         }
+
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, userNames);
 
         UsersAdapter adapter = new UsersAdapter(this, this.users);
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -129,26 +119,6 @@ public class UsersActivity extends AppCompatActivity {
     }
 
 
-    private void renderUsersAsRecyclerView() {
-        if (this.users == null || this.users.size() <= 0) {
-            Toast.makeText(this, "No users...", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        this.recyclerView = (RecyclerView) findViewById(R.id.usersRecyclerView);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        UsersRecyclerAdapter usersRecyclerAdapter = new UsersRecyclerAdapter(this, this.users);
-
-        this.recyclerView.setLayoutManager(layoutManager);
-        this.recyclerView.setHasFixedSize(true);
-        usersRecyclerAdapter.setCallback(new UsersRecyclerAdapter.Callback() {
-            @Override
-            public void onItemClick(int position) {
-                showAlbumsActivity(position);
-            }
-        });
-        this.recyclerView.setAdapter(usersRecyclerAdapter);
-    }
-
     private void showUserProfileScreen(int index) {
         if (this.users == null || this.users.size() <= 0) return;
         User user = this.users.get(index);
@@ -157,17 +127,6 @@ public class UsersActivity extends AppCompatActivity {
         }
     }
 
-    private void addReciever() {
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("com.tutorials.mybroadcast");
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                Toast.makeText(context, "Custom One", Toast.LENGTH_SHORT).show();
-            }
-        };
-        registerReceiver(broadcastReceiver, intentFilter);
-    }
 
     private void showAlbumsActivity(int index) {
         if (this.users == null || this.users.size() <= 0) return;
@@ -177,34 +136,58 @@ public class UsersActivity extends AppCompatActivity {
         }
     }
 
-    public void sendMyBroadcast() {
-        String action = "com.tutorials.mybroadcast";
-        Intent intent = new Intent();
-        intent.setAction(action);
-        sendBroadcast(intent);
+    public void sendEvent(View view) {
+        this.startMyService();
+
+    }
+
+
+    private void startMyService() {
+        Intent intent = new Intent(this, MyService.class);
+        startService(intent);
+    }
+
+
+    private void sendBroadCast() {
+//        String action = "com.sample.mybroadcast";
+//        Intent intent = new Intent();
+//        intent.setAction(action);
+//        sendBroadcast(intent);
     }
 
 
     private void sendNotification() {
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_announcement_black_24dp)
-                        .setContentTitle("My notification")
-                        .setContentText("Hello World!");
-        Intent resultIntent = new Intent(this, NotificationActivity.class);
-        resultIntent.putExtra("KEY", "value");
+        Intent resultIntent = new Intent(this, NotificationMessageActivity.class);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addParentStack(NotificationActivity.class);
+        stackBuilder.addParentStack(NotificationMessageActivity.class);
         stackBuilder.addNextIntent(resultIntent);
-        Bundle bundle = new Bundle();
-        bundle.putString("KEY", "value");
+
+
         PendingIntent resultPendingIntent =
                 stackBuilder.getPendingIntent(
                         0,
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
-        mBuilder.setContentIntent(resultPendingIntent);
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.drawable.ic_assignment_late_black_24dp) //Icon
+                        .setContentTitle("My notification") //Title
+                        .setContentText("Hello World!");//Message
+
+        mBuilder.setContentIntent(resultPendingIntent); //Action, when user tapped on Notification.
+
+
+        NotificationCompat.InboxStyle inboxStyle =
+                new NotificationCompat.InboxStyle();
+        inboxStyle.setBigContentTitle("Event tracker details:");
+        for (int i = 0; i < 4; i++) {
+
+            inboxStyle.addLine("Event - " + i);
+        }
+        mBuilder.setStyle(inboxStyle);
+
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 

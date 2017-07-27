@@ -4,18 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.tutorials.andorid.app.view.users.PhotoActivity">
+    tools:context="com.tutorials.andorid.app.NotificationMessageActivity">
 
-    <ImageView
-        android:id="@+id/image_view_photo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:onClick="logoutApp"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="LOGOUT" />
-
+        android:text="NOTIFICATION ARRIVED" />
 </android.support.constraint.ConstraintLayout>

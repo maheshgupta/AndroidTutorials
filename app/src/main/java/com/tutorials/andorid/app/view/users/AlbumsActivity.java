@@ -1,7 +1,9 @@
 package com.tutorials.andorid.app.view.users;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +14,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
+import com.tutorials.andorid.app.MyBroadCastReciever;
 import com.tutorials.andorid.app.R;
+import com.tutorials.andorid.app.core.BaseActivity;
 import com.tutorials.andorid.app.model.Album;
 import com.tutorials.andorid.app.model.user.User;
 import com.tutorials.andorid.app.service.NetworkTask;
@@ -32,6 +36,8 @@ public class AlbumsActivity extends AppCompatActivity {
 
     private ListView albumsListView;
 
+    BroadcastReceiver broadcastReceiver;
+
     public static Intent createIntent(@NonNull Context context, @NonNull User user) {
         Intent intent = new Intent(context, AlbumsActivity.class);
         intent.putExtra(USER, user);
@@ -45,8 +51,16 @@ public class AlbumsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_albums);
         this.selectedUser = getIntent().getParcelableExtra(USER);
         this.albumsListView = (ListView) findViewById(R.id.albumsListView);
+        this.registerMyBroadReciever();
+
     }
 
+    private void registerMyBroadReciever() {
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.sample.mybroadcast");
+        broadcastReceiver = new MyBroadCastReciever();
+        registerReceiver(broadcastReceiver, intentFilter);
+    }
 
     @Override
     protected void onResume() {
@@ -104,5 +118,9 @@ public class AlbumsActivity extends AppCompatActivity {
         startActivity(PhotosActivity.createIntent(AlbumsActivity.this, album));
     }
 
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(broadcastReceiver);
+    }
 }
