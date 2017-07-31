@@ -37,9 +37,7 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".view.users.UsersActivity">
-
-        </activity>
+        <activity android:name=".view.users.UsersActivity" />
         <activity android:name=".view.users.UserProfileActivity" />
         <activity
             android:name=".view.users.AlbumsActivity"
@@ -58,20 +56,33 @@
         </receiver>
 
         <activity android:name=".NotificationMessageActivity" />
-        <activity android:name=".view.users.login.LoginActivity"></activity>
+        <activity android:name=".view.users.login.LoginActivity" />
 
         <service
             android:name=".services.MyService"
             android:enabled="true"
             android:exported="false" />
 
-        <activity android:name=".view.users.ServicesDemoActivity">
+        <activity android:name=".view.users.ServicesDemoActivity" />
+        <activity android:name=".tutorials.HomePageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".tutorials.services.ServicesActivity"
+            android:label="@string/services" />
+
+        <service
+            android:name=".tutorials.services.RestfulStartedService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".tutorials.services.RestfulBoundService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

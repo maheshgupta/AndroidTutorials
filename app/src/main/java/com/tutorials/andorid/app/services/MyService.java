@@ -19,31 +19,25 @@ public class MyService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.i(TAG, "Mahesh : onCreate: ");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i(TAG, "Mahesh : onStartCommand: ");
         handleTask();
         return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
     public void onDestroy() {
-        Log.i(TAG, "Mahesh : onDestroy: ");
         super.onDestroy();
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.i(TAG, "Mahesh : onCreate: ");
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
     private void handleTask() {
-
-
     }
 
 

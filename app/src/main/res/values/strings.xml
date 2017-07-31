@@ -14,4 +14,19 @@
     <string name="add_fragment">ADD FRAGMENT</string>
     <string name="albums">Albums</string>
     <string name="photos">Photos</string>
+
+    <!--Activity Titles-->
+    <string name="services">Services</string>
+
+
+    <string-array name="home_page_modules">
+        <item>Activities</item>
+        <item>Widgets</item>
+        <item>Services</item>
+        <item>Threads</item>
+        <item>Broadcast Receivers</item>
+        <item>Notifications</item>
+        <item>Material Widgets</item>
+    </string-array>
+
 </resources>
