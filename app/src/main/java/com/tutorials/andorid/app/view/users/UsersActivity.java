@@ -3,33 +3,27 @@ package com.tutorials.andorid.app.view.users;
 import android.app.ActivityOptions;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.Explode;
-import android.transition.Fade;
 import android.transition.Slide;
 import android.transition.Transition;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
-import com.tutorials.andorid.app.MyBroadCastReciever;
 import com.tutorials.andorid.app.NotificationMessageActivity;
 import com.tutorials.andorid.app.R;
 import com.tutorials.andorid.app.core.BaseActivity;
 import com.tutorials.andorid.app.model.user.User;
 import com.tutorials.andorid.app.service.NetworkTask;
+import com.tutorials.andorid.app.services.MyService;
 
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
@@ -143,12 +137,26 @@ public class UsersActivity extends BaseActivity {
     }
 
     public void sendEvent(View view) {
+        this.startMyService();
+
+    }
+
+
+    private void startMyService() {
+        Intent intent = new Intent(this, MyService.class);
+        startService(intent);
+    }
+
+
+    private void sendBroadCast() {
 //        String action = "com.sample.mybroadcast";
 //        Intent intent = new Intent();
 //        intent.setAction(action);
 //        sendBroadcast(intent);
+    }
 
 
+    private void sendNotification() {
         Intent resultIntent = new Intent(this, NotificationMessageActivity.class);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
@@ -171,7 +179,6 @@ public class UsersActivity extends BaseActivity {
         mBuilder.setContentIntent(resultPendingIntent); //Action, when user tapped on Notification.
 
 
-
         NotificationCompat.InboxStyle inboxStyle =
                 new NotificationCompat.InboxStyle();
         inboxStyle.setBigContentTitle("Event tracker details:");
@@ -185,8 +192,6 @@ public class UsersActivity extends BaseActivity {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         mNotificationManager.notify(1000001, mBuilder.build());
-
-
     }
 
 
