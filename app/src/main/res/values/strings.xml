@@ -27,6 +27,7 @@
         <item>Broadcast Receivers</item>
         <item>Notifications</item>
         <item>Material Widgets</item>
+        <item>Content Providers</item>
     </string-array>
 
 </resources>
