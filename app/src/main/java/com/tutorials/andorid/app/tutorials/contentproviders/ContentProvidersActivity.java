@@ -31,7 +31,7 @@ import java.util.Comparator;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
-public class ContentProvidersActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<Object> {
+public class ContentProvidersActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int REQ_CODE_READ_CONTACTS = 100;
 
@@ -39,10 +39,16 @@ public class ContentProvidersActivity extends BaseActivity implements LoaderMana
 
     RecyclerView recyclerViewContacts;
 
+    String[] projectionFields = new String[]{ContactsContract.Contacts._ID,
+            ContactsContract.Contacts.HAS_PHONE_NUMBER,
+            ContactsContract.Contacts.DISPLAY_NAME,
+            ContactsContract.Contacts.PHOTO_URI};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content_providers);
+
     }
 
     private void initLoaderConcept() {
@@ -66,7 +72,8 @@ public class ContentProvidersActivity extends BaseActivity implements LoaderMana
 
 
     private void queryForContacts() {
-        new ContactsTask().execute();
+        initLoaderConcept();
+//        new ContactsTask().execute();
     }
 
     private void _queryForContacts() {
@@ -74,7 +81,12 @@ public class ContentProvidersActivity extends BaseActivity implements LoaderMana
         String _ID = ContactsContract.Contacts._ID;
         String DISPLAY_NAME = ContactsContract.Contacts.DISPLAY_NAME;
         String HAS_PHONE_NUMBER = ContactsContract.Contacts.HAS_PHONE_NUMBER;
-        Cursor cursor = getContentResolver().query(CONTENT_URI, null, null, null, null);
+        Cursor cursor = getContentResolver().query(CONTENT_URI, projectionFields, null, null, null);
+        fillFromCursor(cursor);
+    }
+
+
+    private void fillFromCursor(@NonNull Cursor cursor) {
         if (contacts == null) {
             contacts = new ArrayList<>();
         } else {
@@ -148,22 +160,25 @@ public class ContentProvidersActivity extends BaseActivity implements LoaderMana
     }
 
     @Override
-    public Loader<Object> onCreateLoader(int i, Bundle bundle) {
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        showProgress("", "Please Wait...");
         Uri CONTENT_URI = ContactsContract.Contacts.CONTENT_URI;
-
-
         return new CursorLoader(this, CONTENT_URI, null, null, null, null);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Object> loader, Object o) {
 
     }
 
     @Override
-    public void onLoaderReset(Loader<Object> loader) {
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        fillFromCursor(cursor);
+        renderRecyclerView();
+        dismissDialog();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
 
     }
+
 
     private class ContactsTask extends AsyncTask<Void, Void, Void> {
 
@@ -183,7 +198,6 @@ public class ContentProvidersActivity extends BaseActivity implements LoaderMana
         protected void onPostExecute(Void aVoid) {
             dismissDialog();
             renderRecyclerView();
-
         }
     }
 
