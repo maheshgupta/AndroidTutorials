@@ -28,6 +28,8 @@
         <item>Notifications</item>
         <item>Material Widgets</item>
         <item>Content Providers</item>
+        <item>Shared Preferences</item>
+        <item>SqlLite Demo</item>
     </string-array>
 
 </resources>
