@@ -1,5 +1,6 @@
 package com.tutorials.andorid.app.tutorials.services;
 
+import android.app.IntentService;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +21,7 @@ public class ServicesActivity extends BaseActivity {
 
     RestfulBoundService.RestfulBinder restfulBinder;
     RestfulBoundService restfulBoundService;
+    RestfulBoundService.RestfulHandler restfulHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,19 +41,27 @@ public class ServicesActivity extends BaseActivity {
     }
 
     public void startBoundService(View view) {
-        if (restfulBoundService == null) {
+        if (restfulHandler == null) {
             Intent intent = new Intent(this, RestfulBoundService.class);
             bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
         } else {
-            restfulBoundService.postMessage(Message.obtain());
+//            restfulBoundService.postMessage(Message.obtain());
+            restfulHandler.makeDumbCall();
         }
     }
 
+
     public void stopBoundService(View view) {
-        if (restfulBoundService != null) {
+        if (restfulHandler != null) {
             unbindService(mConnection);
-            restfulBoundService = null;
+            restfulHandler = null;
         }
+    }
+
+
+    public void startIntentService(View view) {
+        Intent intent = new Intent(this, AppIntentService.class);
+        startService(intent);
     }
 
 
@@ -60,7 +70,7 @@ public class ServicesActivity extends BaseActivity {
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             Log.i(TAG, "onServiceConnected: ");
             restfulBinder = (RestfulBoundService.RestfulBinder) iBinder;
-            restfulBoundService = restfulBinder.getService();
+            restfulHandler = restfulBinder.restfulBinder();
         }
 
         @Override

@@ -124,4 +124,13 @@
 
     </LinearLayout>
 
+
+    <Button
+        style="@style/AppButton"
+        android:layout_margin="10dp"
+        android:text="START INTENT SERVICE"
+        android:onClick="startIntentService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

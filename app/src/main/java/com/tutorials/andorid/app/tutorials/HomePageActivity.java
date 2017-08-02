@@ -10,7 +10,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.tutorials.andorid.app.R;
+import com.tutorials.andorid.app.tutorials.contentproviders.ContentProvidersActivity;
 import com.tutorials.andorid.app.tutorials.services.ServicesActivity;
+import com.tutorials.andorid.app.tutorials.sharedprefs.SharedPrefsDemo;
+import com.tutorials.andorid.app.tutorials.sqlite.SqlTutorialActivity;
+import com.tutorials.andorid.app.tutorials.sqlite.ToDoHomeActivity;
 
 import java.util.ArrayList;
 
@@ -50,6 +54,15 @@ public class HomePageActivity extends AppCompatActivity {
                 break;
             case 2:
                 intent.setClass(this, ServicesActivity.class);
+                break;
+            case 7:
+                intent.setClass(this, ContentProvidersActivity.class);
+                break;
+            case 8:
+                intent.setClass(this, SharedPrefsDemo.class);
+                break;
+            case 9:
+                intent.setClass(this, ToDoHomeActivity.class);
                 break;
             default:
                 Toast.makeText(this, "Item not supported yet..", Toast.LENGTH_SHORT).show();
