@@ -45,10 +45,14 @@ public class TodoDatabaseHelper extends SQLiteOpenHelper {
         return writableDatabase.insert(ToDoContract.ToDoEntry.TABLE_NAME, null, contentValues);
     }
 
+    public Cursor queryForTodos() {
+        return getReadableDatabase().query(ToDoContract.ToDoEntry.TABLE_NAME, null, null, null, null, null, null);
+    }
+
+
     public List<Todo> getTodos() {
         ArrayList<Todo> todos = new ArrayList<>();
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(ToDoContract.ToDoEntry.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = this.queryForTodos();
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
             while (cursor.moveToNext()) {

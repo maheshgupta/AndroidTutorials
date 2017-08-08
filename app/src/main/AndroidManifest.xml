@@ -33,7 +33,13 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".view.users.UsersActivity" />
+        <activity android:name=".view.users.UsersActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".view.users.UserProfileActivity" />
         <activity
             android:name=".view.users.AlbumsActivity"
@@ -61,11 +67,7 @@
 
         <activity android:name=".view.users.ServicesDemoActivity" />
         <activity android:name=".tutorials.HomePageActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".tutorials.services.ServicesActivity"
@@ -96,7 +98,18 @@
         <activity
             android:name=".tutorials.sqlite.AddNewTodoActivity"
             android:label="Add New" />
-        <activity android:name=".tutorials.sharedprefs.SharedPrefsDemo"></activity>
+        <activity android:name=".tutorials.sharedprefs.SharedPrefsDemo" />
+
+        <provider
+            android:name=".tutorials.contentproviders.TodosContentProvider"
+            android:authorities="com.android.cp.todos"
+            android:enabled="true"
+            android:exported="true" />
+        <provider
+            android:name=".tutorials.contentproviders.AppTodoContentProvider"
+            android:authorities="com.mahesh.android.todos"
+            android:enabled="true"
+            android:exported="true"></provider>
     </application>
 
 </manifest>

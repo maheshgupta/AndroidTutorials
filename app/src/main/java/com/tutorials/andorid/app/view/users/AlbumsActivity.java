@@ -19,6 +19,7 @@ import com.tutorials.andorid.app.R;
 import com.tutorials.andorid.app.core.BaseActivity;
 import com.tutorials.andorid.app.model.Album;
 import com.tutorials.andorid.app.model.user.User;
+import com.tutorials.andorid.app.retrofit.jsonplaceholder.AlbumsService;
 import com.tutorials.andorid.app.service.NetworkTask;
 
 import java.lang.reflect.Type;
@@ -26,6 +27,11 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import adapters.AlbumsAdapter;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AlbumsActivity extends AppCompatActivity {
 
@@ -69,7 +75,31 @@ public class AlbumsActivity extends AppCompatActivity {
         Toast.makeText(this, "User : " + this.selectedUser.getName(), Toast.LENGTH_SHORT).show();
     }
 
+
     private void pullAlbums() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://jsonplaceholder.typicode.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        AlbumsService albumsService = retrofit.create(AlbumsService.class);
+        Call<ArrayList<Album>> albumsForUser = albumsService.getAlbumsForUser(this.selectedUser.getId());
+        albumsForUser.enqueue(new Callback<ArrayList<Album>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Album>> call, Response<ArrayList<Album>> response) {
+                renderAlbumsList(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Album>> call, Throwable t) {
+                Toast.makeText(AlbumsActivity.this, "Failed to retrieve the albums", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+    private void pullAlbumsNative() {
         try {
 
             String url = "https://jsonplaceholder.typicode.com/albums?userId=" + this.selectedUser.getId();
