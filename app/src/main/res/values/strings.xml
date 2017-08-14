@@ -30,6 +30,8 @@
         <item>Content Providers</item>
         <item>Shared Preferences</item>
         <item>SqlLite Demo</item>
+        <item>Permissions Demo</item>
+        <item>Locations</item>
     </string-array>
 
 </resources>

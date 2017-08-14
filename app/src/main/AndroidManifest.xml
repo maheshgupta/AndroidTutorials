@@ -34,11 +34,13 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".view.users.UsersActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".view.users.UserProfileActivity" />
         <activity
@@ -67,7 +69,11 @@
 
         <activity android:name=".view.users.ServicesDemoActivity" />
         <activity android:name=".tutorials.HomePageActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".tutorials.services.ServicesActivity"
@@ -109,7 +115,10 @@
             android:name=".tutorials.contentproviders.AppTodoContentProvider"
             android:authorities="com.mahesh.android.todos"
             android:enabled="true"
-            android:exported="true"></provider>
+            android:exported="true" />
+
+        <activity android:name=".tutorials.PermissionsDemoActivity" />
+        <activity android:name=".tutorials.locations.LocationsDemoActivity"></activity>
     </application>
 
 </manifest>

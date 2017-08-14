@@ -11,12 +11,10 @@ import android.widget.Toast;
 
 import com.tutorials.andorid.app.R;
 import com.tutorials.andorid.app.tutorials.contentproviders.ContentProvidersActivity;
+import com.tutorials.andorid.app.tutorials.locations.LocationsDemoActivity;
 import com.tutorials.andorid.app.tutorials.services.ServicesActivity;
 import com.tutorials.andorid.app.tutorials.sharedprefs.SharedPrefsDemo;
-import com.tutorials.andorid.app.tutorials.sqlite.SqlTutorialActivity;
 import com.tutorials.andorid.app.tutorials.sqlite.ToDoHomeActivity;
-
-import java.util.ArrayList;
 
 public class HomePageActivity extends AppCompatActivity {
 
@@ -48,10 +46,6 @@ public class HomePageActivity extends AppCompatActivity {
     private void itemClick(int itemNumber) {
         Intent intent = new Intent();
         switch (itemNumber) {
-            case 0:
-                break;
-            case 1:
-                break;
             case 2:
                 intent.setClass(this, ServicesActivity.class);
                 break;
@@ -63,6 +57,12 @@ public class HomePageActivity extends AppCompatActivity {
                 break;
             case 9:
                 intent.setClass(this, ToDoHomeActivity.class);
+                break;
+            case 10:
+                intent.setClass(this, PermissionsDemoActivity.class);
+                break;
+            case 11:
+                intent.setClass(this, LocationsDemoActivity.class);
                 break;
             default:
                 Toast.makeText(this, "Item not supported yet..", Toast.LENGTH_SHORT).show();
