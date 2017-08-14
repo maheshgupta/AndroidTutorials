@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_permssion_check"
+        android:icon="@drawable/ic_send_white_24dp"
+        android:title="CHECK"
+        app:showAsAction="ifRoom"></item>
+    <item
+        android:id="@+id/menu_permission_approve"
+        android:icon="@drawable/ic_check_circle_white_24dp"
+        android:title="APPROVE"
+        app:showAsAction="ifRoom"></item>
+</menu>
