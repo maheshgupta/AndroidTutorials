@@ -3,6 +3,8 @@ package com.tutorials.andorid.app.tutorials;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,13 +12,15 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.tutorials.andorid.app.R;
+import com.tutorials.andorid.app.tutorials.animations.TransitionDemoActivity;
 import com.tutorials.andorid.app.tutorials.contentproviders.ContentProvidersActivity;
 import com.tutorials.andorid.app.tutorials.locations.LocationsDemoActivity;
+import com.tutorials.andorid.app.tutorials.locations.LocationsMapActivity;
 import com.tutorials.andorid.app.tutorials.services.ServicesActivity;
 import com.tutorials.andorid.app.tutorials.sharedprefs.SharedPrefsDemo;
 import com.tutorials.andorid.app.tutorials.sqlite.ToDoHomeActivity;
 
-public class HomePageActivity extends AppCompatActivity {
+public class HomePageActivity extends AppCompatActivity implements View.OnTouchListener {
 
     String[] contents;
 
@@ -33,6 +37,7 @@ public class HomePageActivity extends AppCompatActivity {
 
     private void initViews() {
         this.listView = (ListView) findViewById(R.id.list_view_items);
+        this.listView.setOnTouchListener(this);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, this.contents);
         this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -64,6 +69,12 @@ public class HomePageActivity extends AppCompatActivity {
             case 11:
                 intent.setClass(this, LocationsDemoActivity.class);
                 break;
+            case 12:
+                intent.setClass(this, LocationsMapActivity.class);
+                break;
+            case 13:
+                intent.setClass(this, TransitionDemoActivity.class);
+                break;
             default:
                 Toast.makeText(this, "Item not supported yet..", Toast.LENGTH_SHORT).show();
                 return;
@@ -78,4 +89,11 @@ public class HomePageActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        Log.i("", "onTouch: X : " + motionEvent.getRawX() + " Y : " + motionEvent.getRawY());
+
+
+        return false;
+    }
 }
