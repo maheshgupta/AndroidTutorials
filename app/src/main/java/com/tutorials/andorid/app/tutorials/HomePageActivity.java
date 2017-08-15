@@ -1,9 +1,12 @@
 package com.tutorials.andorid.app.tutorials;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -62,8 +65,15 @@ public class HomePageActivity extends AppCompatActivity {
                 intent.setClass(this, PermissionsDemoActivity.class);
                 break;
             case 11:
-                intent.setClass(this, LocationsDemoActivity.class);
-                break;
+//                intent.setClass(this, LocationsDemoActivity.class);
+
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    Toast.makeText(this, "Older devices", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Newer Devices", Toast.LENGTH_SHORT).show();
+                }
+                return;
+
             default:
                 Toast.makeText(this, "Item not supported yet..", Toast.LENGTH_SHORT).show();
                 return;
@@ -76,6 +86,11 @@ public class HomePageActivity extends AppCompatActivity {
         if (this.contents == null) {
             this.contents = getResources().getStringArray(R.array.home_page_modules);
         }
+    }
+
+
+    private void animationSample() {
+
     }
 
 }

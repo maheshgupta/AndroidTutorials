@@ -72,8 +72,8 @@ public class ContentProvidersActivity extends BaseActivity implements LoaderMana
 
 
     private void queryForContacts() {
-        initLoaderConcept();
-//        new ContactsTask().execute();
+//        initLoaderConcept();
+        new ContactsTask().execute();
     }
 
     private void _queryForContacts() {
@@ -164,7 +164,6 @@ public class ContentProvidersActivity extends BaseActivity implements LoaderMana
         showProgress("", "Please Wait...");
         Uri CONTENT_URI = ContactsContract.Contacts.CONTENT_URI;
         return new CursorLoader(this, CONTENT_URI, null, null, null, null);
-
     }
 
     @Override

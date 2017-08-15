@@ -1,7 +1,9 @@
 package com.tutorials.andorid.app.tutorials;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -16,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tutorials.andorid.app.R;
 
@@ -76,6 +79,9 @@ public class PermissionsDemoActivity extends AppCompatActivity implements Adapte
     }
 
     private void checkForPermissions() {
+
+
+
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < this.checkedItems.length; i++) {
             if (this.checkedItems[i]) {
@@ -159,6 +165,11 @@ public class PermissionsDemoActivity extends AppCompatActivity implements Adapte
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
