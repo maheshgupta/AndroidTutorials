@@ -13,8 +13,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.tutorials.andorid.app.R;
+import com.tutorials.andorid.app.animations.AnimationsDemoActivity;
 import com.tutorials.andorid.app.tutorials.contentproviders.ContentProvidersActivity;
 import com.tutorials.andorid.app.tutorials.locations.LocationsDemoActivity;
+import com.tutorials.andorid.app.tutorials.locations.MapsDemoActivity;
 import com.tutorials.andorid.app.tutorials.services.ServicesActivity;
 import com.tutorials.andorid.app.tutorials.sharedprefs.SharedPrefsDemo;
 import com.tutorials.andorid.app.tutorials.sqlite.ToDoHomeActivity;
@@ -65,15 +67,14 @@ public class HomePageActivity extends AppCompatActivity {
                 intent.setClass(this, PermissionsDemoActivity.class);
                 break;
             case 11:
-//                intent.setClass(this, LocationsDemoActivity.class);
-
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    Toast.makeText(this, "Older devices", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, "Newer Devices", Toast.LENGTH_SHORT).show();
-                }
-                return;
-
+                intent.setClass(this, LocationsDemoActivity.class);
+                break;
+            case 12:
+                intent.setClass(this, MapsDemoActivity.class);
+                break;
+            case 13:
+                intent.setClass(this, AnimationsDemoActivity.class);
+                break;
             default:
                 Toast.makeText(this, "Item not supported yet..", Toast.LENGTH_SHORT).show();
                 return;

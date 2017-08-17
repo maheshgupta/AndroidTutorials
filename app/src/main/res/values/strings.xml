@@ -32,6 +32,9 @@
         <item>SqlLite Demo</item>
         <item>Permissions Demo</item>
         <item>Locations</item>
+        <item>Maps</item>
+        <item>Animations</item>
     </string-array>
+    <string name="title_activity_maps_demo">Map</string>
 
 </resources>
