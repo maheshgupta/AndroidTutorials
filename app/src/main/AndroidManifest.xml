@@ -71,11 +71,13 @@
 
         <activity android:name=".view.users.ServicesDemoActivity" />
         <activity android:name=".tutorials.HomePageActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".tutorials.services.ServicesActivity"
@@ -124,7 +126,15 @@
         <activity
             android:name=".tutorials.locations.MapsDemoActivity"
             android:label="@string/title_activity_maps_demo" />
-        <activity android:name=".animations.AnimationsDemoActivity"></activity>
+        <activity android:name=".animations.AnimationsDemoActivity" />
+        <activity android:name=".TransitionsDemo">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".UserProfileActivity"></activity>
     </application>
 
 </manifest>
